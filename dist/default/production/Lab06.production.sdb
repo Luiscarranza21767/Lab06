@@ -17,15 +17,15 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"60 D:\Backup\Documentos\GitHub\Lab06\main.c
+"59 D:\Backup\Documentos\GitHub\Lab06\main.c
 [v _main main `(v  1 e 1 0 ]
-"115
+"109
 [v _setup setup `(v  1 e 1 0 ]
-"126
+"121
 [v _initUART initUART `(v  1 e 1 0 ]
-"139
+"136
 [v _cadena cadena `(v  1 e 1 0 ]
-"148
+"147
 [v _setup_ADC setup_ADC `(v  1 e 1 0 ]
 "10 D:\Backup\Documentos\GitHub\Lab06\oscilador.c
 [v _setupINTOSC setupINTOSC `(v  1 e 1 0 ]
@@ -191,10 +191,10 @@
 [v _valADC valADC `ui  1 e 2 0 ]
 "54
 [v _buffer buffer `[17]uc  1 e 17 0 ]
-"60
+"59
 [v _main main `(v  1 e 1 0 ]
 {
-"111
+"105
 } 0
 "17 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\itoa.c
 [v _utoa utoa `(*.4uc  1 e 1 0 ]
@@ -234,10 +234,10 @@
 [v ___lwdiv@dividend dividend `ui  1 p 2 2 ]
 "30
 } 0
-"148 D:\Backup\Documentos\GitHub\Lab06\main.c
+"147 D:\Backup\Documentos\GitHub\Lab06\main.c
 [v _setup_ADC setup_ADC `(v  1 e 1 0 ]
 {
-"163
+"162
 } 0
 "10 D:\Backup\Documentos\GitHub\Lab06\oscilador.c
 [v _setupINTOSC setupINTOSC `(v  1 e 1 0 ]
@@ -247,19 +247,19 @@
 [v setupINTOSC@IRCF IRCF `uc  1 a 1 0 ]
 "18
 } 0
-"115 D:\Backup\Documentos\GitHub\Lab06\main.c
+"109 D:\Backup\Documentos\GitHub\Lab06\main.c
 [v _setup setup `(v  1 e 1 0 ]
 {
-"124
+"117
 } 0
-"126
+"121
 [v _initUART initUART `(v  1 e 1 0 ]
 {
-"137
+"132
 } 0
-"139
+"136
 [v _cadena cadena `(v  1 e 1 0 ]
 {
 [v cadena@puntero puntero `*.26uc  1 p 2 4 ]
-"146
+"143
 } 0

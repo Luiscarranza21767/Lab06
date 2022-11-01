@@ -2811,7 +2811,6 @@ char buffer[sizeof(unsigned int)*8+1];
 
 
 
-
 void main(void) {
     setup();
     setupINTOSC(7);
@@ -2824,7 +2823,9 @@ void main(void) {
         cadena("\r ELIGA UNA OPCION ESCRIBIENDO EL NUMERO");
         cadena("\r 1 - Leer potenciometro");
         cadena("\r 2 - Enviar ASCII");
+
         while(PIR1bits.RCIF == 0);
+
         if (RCREG == 0b00110001){
             cadena("\r LECTURA DEL POTENCIOMETRO");
             ADCON0bits.CHS = 0b0000;
@@ -2835,6 +2836,8 @@ void main(void) {
 
             cadena("\r VALOR ACTUAL: ");
             cadena(utoa(buffer,valADC,10));
+
+
             cadena("\r");
         }
         if (RCREG == 0b00110010){
@@ -2849,7 +2852,6 @@ void main(void) {
 
         }
         PIR1bits.RCIF = 0;
-# 106 "main.c"
         _delay((unsigned long)((500)*(8000000/4000.0)));
 
     }
@@ -2867,8 +2869,9 @@ void setup(void){
     PORTB = 0;
     TRISD = 0;
     PORTD = 0;
-
 }
+
+
 
 void initUART(void){
 
@@ -2883,6 +2886,8 @@ void initUART(void){
     RCSTAbits.CREN = 1;
 }
 
+
+
 void cadena(char *puntero){
     while(*puntero != '\0'){
         while (PIR1bits.TXIF == 0);
@@ -2891,6 +2896,8 @@ void cadena(char *puntero){
     }
 
 }
+
+
 
 void setup_ADC(void){
     PORTAbits.RA0 = 0;

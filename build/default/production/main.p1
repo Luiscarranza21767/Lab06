@@ -443,39 +443,39 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 54: char buffer[sizeof(unsigned int)*8+1];
 [v _buffer `uc ~T0 @X0 -> 17 `i e ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"60
-[; ;main.c: 60: void main(void) {
+"59
+[; ;main.c: 59: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"61
-[; ;main.c: 61:     setup();
+"60
+[; ;main.c: 60:     setup();
 [e ( _setup ..  ]
-"62
-[; ;main.c: 62:     setupINTOSC(7);
+"61
+[; ;main.c: 61:     setupINTOSC(7);
 [e ( _setupINTOSC (1 -> -> 7 `i `uc ]
-"63
-[; ;main.c: 63:     initUART();
+"62
+[; ;main.c: 62:     initUART();
 [e ( _initUART ..  ]
-"64
-[; ;main.c: 64:     setup_ADC();
+"63
+[; ;main.c: 63:     setup_ADC();
 [e ( _setup_ADC ..  ]
-"66
-[; ;main.c: 66:     while(1){
+"65
+[; ;main.c: 65:     while(1){
 [e :U 144 ]
 {
-"68
-[; ;main.c: 68:         cadena("\r---------------------------MENU----------------------------");
+"67
+[; ;main.c: 67:         cadena("\r---------------------------MENU----------------------------");
 [e ( _cadena (1 :s 1C ]
-"69
-[; ;main.c: 69:         cadena("\r ELIGA UNA OPCION ESCRIBIENDO EL NUMERO");
+"68
+[; ;main.c: 68:         cadena("\r ELIGA UNA OPCION ESCRIBIENDO EL NUMERO");
 [e ( _cadena (1 :s 2C ]
-"70
-[; ;main.c: 70:         cadena("\r 1 - Leer potenciometro");
+"69
+[; ;main.c: 69:         cadena("\r 1 - Leer potenciometro");
 [e ( _cadena (1 :s 3C ]
-"71
-[; ;main.c: 71:         cadena("\r 2 - Enviar ASCII");
+"70
+[; ;main.c: 70:         cadena("\r 2 - Enviar ASCII");
 [e ( _cadena (1 :s 4C ]
 "72
 [; ;main.c: 72:         while(PIR1bits.RCIF == 0);
@@ -484,228 +484,228 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 146 ]
 [e $ == -> . . _PIR1bits 0 5 `i -> 0 `i 147  ]
 [e :U 148 ]
-"73
-[; ;main.c: 73:         if (RCREG == 0b00110001){
+"74
+[; ;main.c: 74:         if (RCREG == 0b00110001){
 [e $ ! == -> _RCREG `i -> 49 `i 149  ]
 {
-"74
-[; ;main.c: 74:             cadena("\r LECTURA DEL POTENCIOMETRO");
-[e ( _cadena (1 :s 5C ]
 "75
-[; ;main.c: 75:             ADCON0bits.CHS = 0b0000;
-[e = . . _ADCON0bits 0 2 -> -> 0 `i `uc ]
+[; ;main.c: 75:             cadena("\r LECTURA DEL POTENCIOMETRO");
+[e ( _cadena (1 :s 5C ]
 "76
-[; ;main.c: 76:             ADCON0bits.GO = 1;
-[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+[; ;main.c: 76:             ADCON0bits.CHS = 0b0000;
+[e = . . _ADCON0bits 0 2 -> -> 0 `i `uc ]
 "77
-[; ;main.c: 77:             while (ADCON0bits.GO == 1);
+[; ;main.c: 77:             ADCON0bits.GO = 1;
+[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+"78
+[; ;main.c: 78:             while (ADCON0bits.GO == 1);
 [e $U 150  ]
 [e :U 151 ]
 [e :U 150 ]
 [e $ == -> . . _ADCON0bits 1 1 `i -> 1 `i 151  ]
 [e :U 152 ]
-"78
-[; ;main.c: 78:             ADIF = 0;
-[e = _ADIF -> -> 0 `i `b ]
 "79
-[; ;main.c: 79:             valADC = ((ADRESH << 2) + (ADRESL >> 6));
+[; ;main.c: 79:             ADIF = 0;
+[e = _ADIF -> -> 0 `i `b ]
+"80
+[; ;main.c: 80:             valADC = ((ADRESH << 2) + (ADRESL >> 6));
 [e = _valADC -> + << -> _ADRESH `i -> 2 `i >> -> _ADRESL `i -> 6 `i `ui ]
-"81
-[; ;main.c: 81:             cadena("\r VALOR ACTUAL: ");
-[e ( _cadena (1 :s 6C ]
 "82
-[; ;main.c: 82:             cadena(utoa(buffer,valADC,10));
-[e ( _cadena (1 ( _utoa (3 , , &U _buffer _valADC -> 10 `i ]
+[; ;main.c: 82:             cadena("\r VALOR ACTUAL: ");
+[e ( _cadena (1 :s 6C ]
 "83
-[; ;main.c: 83:             cadena("\r");
+[; ;main.c: 83:             cadena(utoa(buffer,valADC,10));
+[e ( _cadena (1 ( _utoa (3 , , &U _buffer _valADC -> 10 `i ]
+"86
+[; ;main.c: 86:             cadena("\r");
 [e ( _cadena (1 :s 7C ]
-"84
-[; ;main.c: 84:         }
+"87
+[; ;main.c: 87:         }
 }
 [e :U 149 ]
-"85
-[; ;main.c: 85:         if (RCREG == 0b00110010){
+"88
+[; ;main.c: 88:         if (RCREG == 0b00110010){
 [e $ ! == -> _RCREG `i -> 50 `i 153  ]
 {
-"86
-[; ;main.c: 86:              cadena("\r ENVIAR ASCII");
+"89
+[; ;main.c: 89:              cadena("\r ENVIAR ASCII");
 [e ( _cadena (1 :s 8C ]
-"87
-[; ;main.c: 87:              cadena("\r ESCRIBA EL CARACTER QUE DESEA EN ASCII");
+"90
+[; ;main.c: 90:              cadena("\r ESCRIBA EL CARACTER QUE DESEA EN ASCII");
 [e ( _cadena (1 :s 9C ]
-"88
-[; ;main.c: 88:              while(PIR1bits.RCIF == 0);
+"91
+[; ;main.c: 91:              while(PIR1bits.RCIF == 0);
 [e $U 154  ]
 [e :U 155 ]
 [e :U 154 ]
 [e $ == -> . . _PIR1bits 0 5 `i -> 0 `i 155  ]
 [e :U 156 ]
-"89
-[; ;main.c: 89:              PORTB = RCREG;
-[e = _PORTB _RCREG ]
-"90
-[; ;main.c: 90:              cadena("\r El ascii que esta mostrando es de: ");
-[e ( _cadena (1 :s 10C ]
-"91
-[; ;main.c: 91:              TXREG = PORTB;
-[e = _TXREG _PORTB ]
 "92
-[; ;main.c: 92:              cadena("\r");
-[e ( _cadena (1 :s 11C ]
+[; ;main.c: 92:              PORTB = RCREG;
+[e = _PORTB _RCREG ]
 "93
-[; ;main.c: 93:              PIR1bits.RCIF == 0;
-[e == -> . . _PIR1bits 0 5 `i -> 0 `i ]
+[; ;main.c: 93:              cadena("\r El ascii que esta mostrando es de: ");
+[e ( _cadena (1 :s 10C ]
+"94
+[; ;main.c: 94:              TXREG = PORTB;
+[e = _TXREG _PORTB ]
 "95
-[; ;main.c: 95:         }
+[; ;main.c: 95:              cadena("\r");
+[e ( _cadena (1 :s 11C ]
+"96
+[; ;main.c: 96:              PIR1bits.RCIF == 0;
+[e == -> . . _PIR1bits 0 5 `i -> 0 `i ]
+"98
+[; ;main.c: 98:         }
 }
 [e :U 153 ]
-"96
-[; ;main.c: 96:         PIR1bits.RCIF = 0;
+"99
+[; ;main.c: 99:         PIR1bits.RCIF = 0;
 [e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-"106
-[; ;main.c: 106:         _delay((unsigned long)((500)*(8000000/4000.0)));
+"100
+[; ;main.c: 100:         _delay((unsigned long)((500)*(8000000/4000.0)));
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"108
-[; ;main.c: 108:     }
+"102
+[; ;main.c: 102:     }
 }
 [e :U 143 ]
 [e $U 144  ]
 [e :U 145 ]
-"111
-[; ;main.c: 111: }
+"105
+[; ;main.c: 105: }
 [e :UE 142 ]
 }
-"115
-[; ;main.c: 115: void setup(void){
+"109
+[; ;main.c: 109: void setup(void){
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"116
-[; ;main.c: 116:     ANSEL = 0;
+"110
+[; ;main.c: 110:     ANSEL = 0;
 [e = _ANSEL -> -> 0 `i `uc ]
-"117
-[; ;main.c: 117:     ANSELH = 0;
+"111
+[; ;main.c: 111:     ANSELH = 0;
 [e = _ANSELH -> -> 0 `i `uc ]
-"119
-[; ;main.c: 119:     TRISB = 0;
+"113
+[; ;main.c: 113:     TRISB = 0;
 [e = _TRISB -> -> 0 `i `uc ]
-"120
-[; ;main.c: 120:     PORTB = 0;
+"114
+[; ;main.c: 114:     PORTB = 0;
 [e = _PORTB -> -> 0 `i `uc ]
-"121
-[; ;main.c: 121:     TRISD = 0;
+"115
+[; ;main.c: 115:     TRISD = 0;
 [e = _TRISD -> -> 0 `i `uc ]
-"122
-[; ;main.c: 122:     PORTD = 0;
+"116
+[; ;main.c: 116:     PORTD = 0;
 [e = _PORTD -> -> 0 `i `uc ]
-"124
-[; ;main.c: 124: }
+"117
+[; ;main.c: 117: }
 [e :UE 157 ]
 }
-"126
-[; ;main.c: 126: void initUART(void){
+"121
+[; ;main.c: 121: void initUART(void){
 [v _initUART `(v ~T0 @X0 1 ef ]
 {
 [e :U _initUART ]
 [f ]
-"128
-[; ;main.c: 128:     SPBRG = 12;
+"123
+[; ;main.c: 123:     SPBRG = 12;
 [e = _SPBRG -> -> 12 `i `uc ]
-"130
-[; ;main.c: 130:     TXSTAbits.SYNC = 0;
+"125
+[; ;main.c: 125:     TXSTAbits.SYNC = 0;
 [e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
-"131
-[; ;main.c: 131:     RCSTAbits.SPEN = 1;
+"126
+[; ;main.c: 126:     RCSTAbits.SPEN = 1;
 [e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
-"133
-[; ;main.c: 133:     TXSTAbits.TXEN = 1;
+"128
+[; ;main.c: 128:     TXSTAbits.TXEN = 1;
 [e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
-"134
-[; ;main.c: 134:     PIR1bits.TXIF = 0;
+"129
+[; ;main.c: 129:     PIR1bits.TXIF = 0;
 [e = . . _PIR1bits 0 4 -> -> 0 `i `uc ]
-"136
-[; ;main.c: 136:     RCSTAbits.CREN = 1;
+"131
+[; ;main.c: 131:     RCSTAbits.CREN = 1;
 [e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-"137
-[; ;main.c: 137: }
+"132
+[; ;main.c: 132: }
 [e :UE 158 ]
 }
-"139
-[; ;main.c: 139: void cadena(char *puntero){
+"136
+[; ;main.c: 136: void cadena(char *puntero){
 [v _cadena `(v ~T0 @X0 1 ef1`*uc ]
 {
 [e :U _cadena ]
 [v _puntero `*uc ~T0 @X0 1 r1 ]
 [f ]
-"140
-[; ;main.c: 140:     while(*puntero != '\0'){
+"137
+[; ;main.c: 137:     while(*puntero != '\0'){
 [e $U 160  ]
 [e :U 161 ]
 {
-"141
-[; ;main.c: 141:         while (PIR1bits.TXIF == 0);
+"138
+[; ;main.c: 138:         while (PIR1bits.TXIF == 0);
 [e $U 163  ]
 [e :U 164 ]
 [e :U 163 ]
 [e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 164  ]
 [e :U 165 ]
-"142
-[; ;main.c: 142:         TXREG = *puntero;
+"139
+[; ;main.c: 139:         TXREG = *puntero;
 [e = _TXREG -> *U _puntero `uc ]
-"143
-[; ;main.c: 143:         puntero++;
+"140
+[; ;main.c: 140:         puntero++;
 [e ++ _puntero * -> -> 1 `i `x -> -> # *U _puntero `i `x ]
-"144
-[; ;main.c: 144:     }
+"141
+[; ;main.c: 141:     }
 }
 [e :U 160 ]
-"140
-[; ;main.c: 140:     while(*puntero != '\0'){
+"137
+[; ;main.c: 137:     while(*puntero != '\0'){
 [e $ != -> *U _puntero `ui -> 0 `ui 161  ]
 [e :U 162 ]
-"146
-[; ;main.c: 146: }
+"143
+[; ;main.c: 143: }
 [e :UE 159 ]
 }
-"148
-[; ;main.c: 148: void setup_ADC(void){
+"147
+[; ;main.c: 147: void setup_ADC(void){
 [v _setup_ADC `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup_ADC ]
 [f ]
-"149
-[; ;main.c: 149:     PORTAbits.RA0 = 0;
+"148
+[; ;main.c: 148:     PORTAbits.RA0 = 0;
 [e = . . _PORTAbits 0 0 -> -> 0 `i `uc ]
-"150
-[; ;main.c: 150:     TRISAbits.TRISA0 = 1;
+"149
+[; ;main.c: 149:     TRISAbits.TRISA0 = 1;
 [e = . . _TRISAbits 0 0 -> -> 1 `i `uc ]
-"151
-[; ;main.c: 151:     ANSELbits.ANS0 = 1;
+"150
+[; ;main.c: 150:     ANSELbits.ANS0 = 1;
 [e = . . _ANSELbits 0 0 -> -> 1 `i `uc ]
-"153
-[; ;main.c: 153:     ADCON0bits.ADCS1 = 0;
+"152
+[; ;main.c: 152:     ADCON0bits.ADCS1 = 0;
 [e = . . _ADCON0bits 1 7 -> -> 0 `i `uc ]
-"154
-[; ;main.c: 154:     ADCON0bits.ADCS0 = 1;
+"153
+[; ;main.c: 153:     ADCON0bits.ADCS0 = 1;
 [e = . . _ADCON0bits 1 6 -> -> 1 `i `uc ]
-"156
-[; ;main.c: 156:     ADCON1bits.VCFG1 = 0;
+"155
+[; ;main.c: 155:     ADCON1bits.VCFG1 = 0;
 [e = . . _ADCON1bits 0 2 -> -> 0 `i `uc ]
-"157
-[; ;main.c: 157:     ADCON1bits.VCFG0 = 0;
+"156
+[; ;main.c: 156:     ADCON1bits.VCFG0 = 0;
 [e = . . _ADCON1bits 0 1 -> -> 0 `i `uc ]
-"159
-[; ;main.c: 159:     ADCON1bits.ADFM = 0;
+"158
+[; ;main.c: 158:     ADCON1bits.ADFM = 0;
 [e = . . _ADCON1bits 0 4 -> -> 0 `i `uc ]
-"161
-[; ;main.c: 161:     ADCON0bits.ADON = 1;
+"160
+[; ;main.c: 160:     ADCON0bits.ADON = 1;
 [e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
-"162
-[; ;main.c: 162:     _delay((unsigned long)((100)*(8000000/4000000.0)));
+"161
+[; ;main.c: 161:     _delay((unsigned long)((100)*(8000000/4000000.0)));
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-"163
-[; ;main.c: 163: }
+"162
+[; ;main.c: 162: }
 [e :UE 166 ]
 }
 [a 3C 13 32 49 32 45 32 76 101 101 114 32 112 111 116 101 110 99 105 111 109 101 116 114 111 0 ]

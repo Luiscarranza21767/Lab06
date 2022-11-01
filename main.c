@@ -46,63 +46,57 @@
 // Definición de funciones y variables
 //******************************************************************************
 void setup(void);
-void initUART(void);
+void initUART(void);        
 void cadena(char *puntero);
 void setup_ADC(void);
 
 unsigned int valADC;
-char buffer[sizeof(unsigned int)*8+1];
-
-
+char buffer[sizeof(unsigned int)*8+1]; // Variable de buffer para conversión
+                                       // de unsigned int a char
 //******************************************************************************
 // Función principal
 //******************************************************************************
 void main(void) {
-    setup();
+    setup();            // Realiza la configuración de puertos
     setupINTOSC(7);     // Oscilador a 8 MHz
-    initUART();
-    setup_ADC();
+    initUART();         // Configuración para el módulo UART
+    setup_ADC();        // Configuración para el módulo ADC
     
     while(1){
-        //cadena("Bienvenido\rHola Mundo");
+        // Imprime el siguiente encabezado en la terminal
         cadena("\r---------------------------MENU----------------------------");
         cadena("\r ELIGA UNA OPCION ESCRIBIENDO EL NUMERO");
         cadena("\r 1 - Leer potenciometro");
         cadena("\r 2 - Enviar ASCII");
-        while(PIR1bits.RCIF == 0);
-        if (RCREG == 0b00110001){
+        // Mientras no exista interrupción de la comunicación serial no hace nda
+        while(PIR1bits.RCIF == 0); // Cuando hay interrupción continua
+        // Revisa el valor que recibe desde la terminal
+        if (RCREG == 0b00110001){  // Si es 1 en ASCII ejecuta
             cadena("\r LECTURA DEL POTENCIOMETRO");   
-            ADCON0bits.CHS = 0b0000;
+            ADCON0bits.CHS = 0b0000;    // Inicia el ADC
             ADCON0bits.GO = 1;
-            while (ADCON0bits.GO == 1); // Revisa si ya terminó la conversión ADC
-            ADIF = 0;               // Apaga la bandera del ADC
+            while (ADCON0bits.GO == 1); // Revisa si terminó la conversión ADC
+            ADIF = 0;                   // Apaga la bandera del ADC
             valADC = ((ADRESH << 2) + (ADRESL >> 6));
-            // Carga los bits bajos a CCP1CON <5:4>
+            // Junta los 10 bits en una variable
             cadena("\r VALOR ACTUAL: ");
-            cadena(utoa(buffer,valADC,10));
+            cadena(utoa(buffer,valADC,10)); // Convierte el valor de la variable
+                                            // De binario a tipo cadena y lo 
+                                            // Muestra en la terminal
             cadena("\r");
         }
-        if (RCREG == 0b00110010){
+        if (RCREG == 0b00110010){   // Si es 2 en ASCII ejecuta
              cadena("\r ENVIAR ASCII"); 
              cadena("\r ESCRIBA EL CARACTER QUE DESEA EN ASCII"); 
-             while(PIR1bits.RCIF == 0);
-             PORTB = RCREG;
+             while(PIR1bits.RCIF == 0); // Mientras escribe nada no hace nada
+             PORTB = RCREG;             // Muestra el ASCII en el puerto B
              cadena("\r El ascii que esta mostrando es de: ");
-             TXREG = PORTB;
+             TXREG = PORTB;             // Muestra el ASCII en la terminal
              cadena("\r");
-             PIR1bits.RCIF == 0;   
+             PIR1bits.RCIF == 0;        // Apaga la interrupción de UART
              
         }
         PIR1bits.RCIF = 0;
-        
-//        PORTD++;
-//        if(TXSTAbits.TRMT == 1){
-//            TXREG = PORTD;
-//        }
-//        if(PIR1bits.RCIF == 1){
-//            PORTB = RCREG;
-//            PIR1bits.RCIF = 0;
-//        }
         __delay_ms(500);
         
     }
@@ -119,10 +113,11 @@ void setup(void){
     TRISB = 0;
     PORTB = 0;
     TRISD = 0;
-    PORTD = 0;
-    
+    PORTD = 0; 
 }
-
+//******************************************************************************
+// Configuración de módulo UART
+//******************************************************************************
 void initUART(void){
     // Configuración velocidad de baud rate
     SPBRG = 12;
@@ -135,16 +130,20 @@ void initUART(void){
     
     RCSTAbits.CREN = 1;     // Habilitar la recepción
 }
-
+//******************************************************************************
+// Función para enviar caracteres del PIC a la terminal
+//******************************************************************************
 void cadena(char *puntero){
-    while(*puntero != '\0'){
-        while (PIR1bits.TXIF == 0);
-        TXREG = *puntero;
-        puntero++;
+    while(*puntero != '\0'){    // Mientras puntero no está en blanco ejecuta
+        while (PIR1bits.TXIF == 0); // Si no hay nada en TXIF no hace nada
+        TXREG = *puntero;           // Envía la siguiente cadena
+        puntero++;                  // Incrementa el puntero
     }
 
 }
-
+//******************************************************************************
+// Configuración de módulo ADC
+//******************************************************************************
 void setup_ADC(void){
     PORTAbits.RA0 = 0;      // Inicia el bit 0 de PORTA en 0
     TRISAbits.TRISA0 = 1;   // RA0 es entrada
